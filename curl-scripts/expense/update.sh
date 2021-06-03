@@ -1,12 +1,13 @@
 API="http://localhost:4741"
-URL_PATH="/create-bill"
+URL_PATH="/update-expense"
 
-curl "${API}${URL_PATH}" \
+curl "${API}${URL_PATH}/${ID}" \
 --include \
---request POST \
+--request PATCH \
 --header "Content-Type: application/json" \
+--header "Authorization: Bearer ${TOKEN}" \
 --data '{
-  "bill": {
+  "expense": {
     "company": "'"${COMPANY}"'",
     "amount": "'"${AMOUNT}"'",
     "due": "'"${DUE}"'"

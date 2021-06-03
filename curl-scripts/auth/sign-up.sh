@@ -1,4 +1,4 @@
-#!/bin/bash
+EM#!/bin/bash
 
 API="http://localhost:4741"
 URL_PATH="/sign-up"
