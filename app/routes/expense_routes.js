@@ -52,4 +52,20 @@ router.patch('/update-expense/:id', requireToken, (req, res, next) => {
     .catch(next)
 })
 
+// This will Show a specific Expense
+router.get('/expense/:id', requireToken, (req, res, next) => {
+// Step 1 - find expense using specific id
+// Step 2 - handle 404 incase expense is not found
+// Step 3 - if expense is found require ownership to insure not just anyone
+//          can view this
+// Step 4 - send the expense with using JSON
+// This step wasnt needed but i would like to understand what everything is
+  const expenseId = req.params.id
+  Expense.findById(expenseId)
+    .then(handle404)
+    .then(foundExpense => requireOwnership(req, foundExpense))
+    .then(authExpense => res.json({ authExpense }))
+    .catch(next)
+})
+
 module.exports = router

@@ -6,3 +6,7 @@
   ## Commit 2
 
   *This Commit will add the update route aswell as curl script to test route. I actually forgot to add the authentication in the first commit so i went back and added it*
+
+## Commit 3
+
+*This Commit will add the show route aswell as curl script to test route.*
