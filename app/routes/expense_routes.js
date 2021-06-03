@@ -52,7 +52,7 @@ router.patch('/update-expense/:id', requireToken, (req, res, next) => {
     .catch(next)
 })
 
-// This will Show a specific Expense
+// This will *Show* a specific Expense
 router.get('/expense/:id', requireToken, (req, res, next) => {
 // Step 1 - find expense using specific id
 // Step 2 - handle 404 incase expense is not found
@@ -65,6 +65,20 @@ router.get('/expense/:id', requireToken, (req, res, next) => {
     .then(handle404)
     .then(foundExpense => requireOwnership(req, foundExpense))
     .then(authExpense => res.json({ authExpense }))
+    .catch(next)
+})
+
+// This will Index all Expenses
+router.get('/expense', requireToken, (req, res, next) => {
+  // Step 1 - I like to send the params as vars for more legible code
+  // Step 2 - find all expenses by the owner of
+  // Step 3 - for now i would populate that large {owner} as just email
+  // untill you create user virtual
+  const expenseOwner = {owner: req.user._id}
+  Expense.find(expenseOwner)
+    // .then(handle404)
+    .populate('owner', 'email')
+    .then(authExpenses => res.json(authExpenses))
     .catch(next)
 })
 
