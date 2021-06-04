@@ -82,4 +82,19 @@ router.get('/expense', requireToken, (req, res, next) => {
     .catch(next)
 })
 
+// Last but not least Delete an expense
+router.delete('/expense/:id', requireToken, (req, res, next) => {
+// Step 1 - Find the expense you want deleted with the ID
+// Step 2 - handle404 then require ownership
+// Step 3 - delete the expense
+// Step 4 - send the res
+  const expenseId = req.params.id
+  Expense.findById(expenseId)
+    .then(handle404)
+    .then(foundExpense => requireOwnership(req, foundExpense))
+    .then(authExpense => authExpense.deleteOne())
+    .then(() => res.status(204))
+    .catch(next)
+})
+
 module.exports = router

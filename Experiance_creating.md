@@ -14,3 +14,9 @@
   ## Commit 4
 
   *This Commit will add the index route aswell as curl script to test route.*
+
+  ## Commit 5
+
+  *This Commit will add the delete route aswell as curl script to test route.*
+
+  *There might still be a little problem because the server hangs even though the expense get deleted in the server*
