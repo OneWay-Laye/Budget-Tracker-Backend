@@ -48,7 +48,7 @@ router.patch('/update-expense/:id', requireToken, (req, res, next) => {
     .then((authExpense) => {
       return authExpense.updateOne(expenseData)
     })
-    .then(expense => res.status(204))
+    .then(expense => res.status(204).json({ expense }))
     .catch(next)
 })
 
@@ -93,7 +93,7 @@ router.delete('/expense/:id', requireToken, (req, res, next) => {
     .then(handle404)
     .then(foundExpense => requireOwnership(req, foundExpense))
     .then(authExpense => authExpense.deleteOne())
-    .then(() => res.status(204))
+    .then(() => res.status(204).json())
     .catch(next)
 })
 
