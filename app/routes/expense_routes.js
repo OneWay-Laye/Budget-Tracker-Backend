@@ -48,7 +48,7 @@ router.patch('/update-expense/:id', requireToken, (req, res, next) => {
     .then((authExpense) => {
       return authExpense.updateOne(expenseData)
     })
-    .then(expense => res.status(204))
+    .then(expense => res.status(204).json())
     .catch(next)
 })
 
@@ -73,7 +73,7 @@ router.get('/expense', requireToken, (req, res, next) => {
   // Step 1 - I like to send the params as vars for more legible code
   // Step 2 - find all expenses by the owner of
   // Step 3 - for now i would populate that large {owner} as just email
-  // untill you create user virtual
+  // until you create user virtual
   const expenseOwner = {owner: req.user._id}
   Expense.find(expenseOwner)
     // .then(handle404)
@@ -93,7 +93,7 @@ router.delete('/expense/:id', requireToken, (req, res, next) => {
     .then(handle404)
     .then(foundExpense => requireOwnership(req, foundExpense))
     .then(authExpense => authExpense.deleteOne())
-    .then(() => res.status(204))
+    .then(() => res.status(204).json())
     .catch(next)
 })
 
