@@ -48,7 +48,11 @@ router.patch('/update-expense/:id', requireToken, (req, res, next) => {
     .then((authExpense) => {
       return authExpense.updateOne(expenseData)
     })
+<<<<<<< HEAD
     .then(expense => res.status(204).json({ expense }))
+=======
+    .then(expense => res.status(204).json())
+>>>>>>> dev
     .catch(next)
 })
 
@@ -73,7 +77,7 @@ router.get('/expense', requireToken, (req, res, next) => {
   // Step 1 - I like to send the params as vars for more legible code
   // Step 2 - find all expenses by the owner of
   // Step 3 - for now i would populate that large {owner} as just email
-  // untill you create user virtual
+  // until you create user virtual
   const expenseOwner = {owner: req.user._id}
   Expense.find(expenseOwner)
     // .then(handle404)
