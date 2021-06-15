@@ -48,11 +48,8 @@ router.patch('/update-expense/:id', requireToken, (req, res, next) => {
     .then((authExpense) => {
       return authExpense.updateOne(expenseData)
     })
-<<<<<<< HEAD
+    // .then(expesne => )
     .then(expense => res.status(204).json({ expense }))
-=======
-    .then(expense => res.status(204).json())
->>>>>>> dev
     .catch(next)
 })
 
